@@ -217,10 +217,10 @@ namespace ApiLibertadoresHAS.Data
                 entity.Property(e => e.PasswordHash)
                     .IsRequired(false);
 
-                entity.Property(e => entity.PasswordSalt)
+                entity.Property(e => e.PasswordSalt)
                     .IsRequired(false);
 
-                entity.Property(e => entity.Foto)
+                entity.Property(e => e.Foto)
                     .IsRequired(false);
 
                 entity.Property(e => e.Latitude)

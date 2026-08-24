@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using ApiLibertadoresHAS.Models;
 using ApiLibertadoresHAS.Utils;
+using ApiLibertadoresHAS.Data;
 
 namespace ApiLibertadoresHAS.Controllers
 {   
@@ -47,6 +48,46 @@ namespace ApiLibertadoresHAS.Controllers
                 await _context.SaveChangesAsync();
 
                 return Ok(user.Id);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message + " - " + ex.InnerException);
+            }
+        }
+
+        [HttpPost("Autenticar")]
+        public async Task<IActionResult> AutenticarUsuario(Usuario credenciais)
+        {
+            try
+            {
+                Usuario? usuario = await _context.TB_USUARIOS.FirstOrDefaultAsync(x => x.Username.ToLower().Equals(credenciais.Username.ToLower()));
+
+                if (usuario == null)
+                    throw new System.Exception("Usuário não encontrado.");
+                else if (!Criptografia.VerificarPasswordHash(credenciais.PasswordString, usuario.PasswordHash, usuario.PasswordSalt))
+                    throw new System.Exception("Senha incorreta.");
+                else
+                {
+                    usuario.PasswordString = string.Empty;
+                    usuario.PasswordHash = null;
+                    usuario.PasswordSalt = null;
+
+                    return Ok(usuario);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message + " - " + ex.InnerException);
+            }
+        }
+
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetUsuarios()
+        {
+            try
+            {
+                List<Usuario> lista = await _context.TB_USUARIOS.ToListAsync();
+                return Ok(lista);
             }
             catch (System.Exception ex)
             {

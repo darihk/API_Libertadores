@@ -20,11 +20,11 @@ namespace ApiLibertadoresHAS.Utils
 
         public static bool VerificarPasswordHash(string password, byte[] hash, byte[] salt)
         {
-            using (var hmac = new SystemException.Security.Cryptography.HMACSHAS512(salt))
+            using (var hmac = new System.Security.Cryptography.HMACSHA512(salt))
             {
                 var computedHash = 
                 hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                    for (int i = 0; i <ComputedHash.Length; i++)
+                    for (int i = 0; i <computedHash.Length; i++)
                 {
                         if (computedHash[i] != hash[i])
                     {
