@@ -315,3 +315,4 @@ F:\coisos\lição\3AI\PAMII\2 SEM\API_Libertadores\obj\Debug\net10.0\swae.build.
 F:\coisos\lição\3AI\PAMII\2 SEM\API_Libertadores\obj\Debug\net10.0\ApiLiber.4620BB4D.Up2Date
 F:\coisos\lição\3AI\PAMII\2 SEM\API_Libertadores\obj\Debug\net10.0\ApiLibertadoresHAS.genruntimeconfig.cache
 F:\coisos\lição\3AI\PAMII\2 SEM\API_Libertadores\obj\Debug\net10.0\ref\ApiLibertadoresHAS.dll
+F:\coisos\lição\3AI\PAMII\2 SEM\API_Libertadores\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
