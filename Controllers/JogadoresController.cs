@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using ApiLibertadoresHAS.Data;
+using ApiLibertadoresHAS.Extensions;
 using ApiLibertadoresHAS.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ApiLibertadoresHAS.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="UsuarioComum, Admin")]
     [ApiController]
     [Route("[controller]")]
     public class JogadoresController : ControllerBase
@@ -107,6 +108,22 @@ namespace ApiLibertadoresHAS.Controllers
             {
                 return BadRequest(ex.Message + " - " + ex.InnerException);
             }
+        }
+
+        [HttpGet("GetByUser")]
+        public async Task<IActionResult> GetByUserAsync()
+        {
+            try
+            {
+                int id = User.UsuarioId();
+
+                List<Jogador> lista = await _context.TB_JOGADORES.Where(u => u.Usuario.Id == id).ToListAsync();
+                return Ok(lista);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message + "-" + ex.InnerException);
+            } //procura jogador pelo id do usuario
         }
 
 

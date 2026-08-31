@@ -22,5 +22,11 @@ namespace ApiLibertadoresHAS.Models
         public Time? Time { get; set; }
 
         public Posicao? Posicao { get; set; }
-    }
+
+        public int UsuarioId {get; set;}
+
+        public Usuario Usuario {get; set;} = null!;
+    
+    
+       }
 }
