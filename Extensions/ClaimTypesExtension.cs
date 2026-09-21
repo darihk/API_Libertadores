@@ -20,5 +20,18 @@ namespace ApiLibertadoresHAS.Extensions
                 return 0;
             }
         }
+
+        public static string UsuarioPerfil(this ClaimsPrincipal user)
+        {
+            try
+            {
+                var usuarioPerfil = user.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)? . Value ?? string.Empty;
+                return usuarioPerfil;
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
     }
 }
